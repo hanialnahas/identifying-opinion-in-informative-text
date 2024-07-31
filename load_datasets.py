@@ -1,7 +1,10 @@
 import os
+from dotenv import load_dotenv
 from datasets import load_dataset, DatasetDict, concatenate_datasets
 
-TOKEN = os.environ['HF_TOKEN']
+load_dotenv()
+
+TOKEN = os.getenv('HF_TOKEN')
 
 voxpopuli = load_dataset("esb/datasets", "voxpopuli", trust_remote_code=True, token=TOKEN)
 cv_13 = load_dataset("mozilla-foundation/common_voice_13_0", "en", trust_remote_code=True, token=TOKEN)

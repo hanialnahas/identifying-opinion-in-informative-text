@@ -2,10 +2,14 @@ import os
 import torch
 import math
 
+from dotenv import load_dotenv
+
 from datasets import load_from_disk
 from transformers import BitsAndBytesConfig, AutoModelForCausalLM, AutoTokenizer
 
-TOKEN = os.environ["HF_TOKEN"]
+load_dotenv()
+
+TOKEN = os.getenv("HF_TOKEN")
 
 OPINIONATED_DATA_PATH = "data/opinionated"
 INFORMATIVE_DATA_PATH = "data/common_voice_13_0"

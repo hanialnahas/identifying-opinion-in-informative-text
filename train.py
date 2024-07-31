@@ -3,12 +3,16 @@ import torch
 import peft
 from datasets import load_from_disk
 from transformers import BitsAndBytesConfig, AutoModelForCausalLM
+from dotenv import load_dotenv
 
 from informative_model import InformativeModel
 from opinionated_model import OpinionatedModel
 
-TOKEN = os.environ["HF_TOKEN"]
-WANDB_PROJECT = os.environ["WANDB_PROJECT"]
+load_dotenv()
+
+TOKEN = os.getenv("HF_TOKEN")
+print(TOKEN)
+WANDB_PROJECT = os.getenv("WANDB_PROJECT")
 
 OPINIONATED_DATA_PATH = "data/opinionated"
 INFORMATIVE_DATA_PATH = "data/common_voice_13_0"
