@@ -37,11 +37,11 @@ else:
     informative_save_path = "pretrained/informative_model"
 
 bnb_config = BitsAndBytesConfig(
-    load_in_4bit=True,
-    bnb_4bit_quant_type="nf4",
-    bnb_4bit_compute_dtype=torch.bfloat16
+    load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_compute_dtype=torch.bfloat16
 )
-base_model = AutoModelForCausalLM.from_pretrained("google/gemma-2b", quantization_config=bnb_config, device_map={"": 0}, token=TOKEN)
+base_model = AutoModelForCausalLM.from_pretrained(
+    "google/gemma-2b", quantization_config=bnb_config, device_map={"": 0}, token=TOKEN
+)
 
 opinionated_merged = peft.PeftModel.from_pretrained(base_model, opinionated_save_path)
 opinionated_merged.merge_and_unload().save_pretrained("merged/opinionated_merged")
